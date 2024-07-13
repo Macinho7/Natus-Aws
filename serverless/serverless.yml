@@ -1,0 +1,157 @@
+
+org: 
+
+app: 
+
+service: 
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  timeout: 45
+functions:
+  CriaTabela:
+    handler: DB/criaTabela.createTable
+    events:
+      - httpApi:
+          path: criaTabela
+          method: post
+  criarUsuario:
+    handler: funcoes/criaUsuario.CriaUsuario
+    events:
+      - httpApi:
+          path: criaUsuario
+          method: post
+  listarUsuarios:
+    handler: funcoes/criaUsuario.ListarUsuarios
+    events:
+      - httpApi:
+          path: listarUsuarios
+          method: get
+  ListarUsuario:
+    handler: funcoes/criaUsuario.ListarUsuario
+    events:
+      - httpApi:
+          path: listarUsuario/{id}
+          method: get
+  seguirUsuario:
+    handler: funcoes/criaUsuario.SeguirUsuario
+    events:
+      - httpApi:
+          path: seguirUsuario/{id}/{id2}
+          method: post
+  atualizarUsuario:
+    handler: funcoes/criaUsuario.atualizarUsuario
+    events:
+      - httpApi:
+          path: atualizaUsuario/{id}
+          method: patch
+  deixarDeSeguir:
+    handler: funcoes/criaUsuario.DeixarDeSeguir
+    events:
+      - httpApi:
+          path: deixarDeSeguir/{id}/{id2}
+          method: post
+  deletaUsuario:
+    handler: funcoes/criaUsuario.deletaUsuario
+    events:
+      - httpApi:
+          path: deletaUsuario/{id}
+          method: delete
+  SeguirBlog:
+    handler: funcoes/criaUsuario.SeguirBlog
+    events:
+      - httpApi:
+          path: seguirBlog/{id}/{id2}/{id3}
+          method: post
+  ListarBlogsDoUsuario:
+    handler: funcoes/criaBlog.ListarBlogsDoUsuario
+    events:
+      - httpApi:
+          path: listarBlogs/{id}
+          method: get
+  ListarBlogDoUsuario:
+    handler: funcoes/criaBlog.ListarBlogDoUsuario
+    events:
+      - httpApi:
+          path: listarBlog/{id}/{id2}
+          method: get
+  atualizaBlog:
+    handler: funcoes/criaBlog.atualizaBlog
+    events:
+      - httpApi:
+          path: atualizaBlog/{id}/{id2}
+          method: patch
+  deletaBlog:
+    handler: funcoes/criaBlog.deletaBlog
+    events:
+      - httpApi:
+          path: deletaBlog/{id}/{id2}
+          method: delete
+  criaBlog:
+    handler: funcoes/criaBlog.CriaBLog
+    events:
+      - httpApi:
+          path: criaBlog/{id}
+          method: post
+  criaPublicacao:
+    handler: funcoes/criaPublicacao.CriaPublicacao
+    events:
+      - httpApi:
+          path: criaPublicacao/{id}/{id2}
+          method: post
+  CurtirPublicacao:
+    handler: funcoes/criaPublicacao.CurtirPublicacao
+    events:
+      - httpApi:
+          path: curtirPublicacao/{id}/{id2}/{id3}/{id4}
+          method: post
+  removerLike:
+    handler: funcoes/criaPublicacao.removerLike
+    events:
+      - httpApi:
+          path: removerPublicacao/{id}/{id2}/{id3}/{id4}
+          method: post
+  deletaPublicacao:
+    handler: funcoes/criaPublicacao.deletaPublicacao
+    events:
+      - httpApi:
+          path: deletaPublicacao/{id}/{id2}/{id3}
+          method: delete
+  criarComentario:
+    handler: funcoes/criaComentario.CriaComentario
+    events:
+      - httpApi:
+          path: criarComentario/{id}/{id2}/{id3}/{id4}
+          method: post
+  CurtirComentario:
+    handler: funcoes/criaComentario.CurtirComentario
+    events:
+      - httpApi:
+          path: curtirComentario/{id}/{id2}/{id3}/{id4}/{id5}
+          method: post
+  removerLikeComentario:
+    handler: funcoes/criaComentario.removerLikeComentario
+    events:
+      - httpApi:
+          path: removerLikeComentario/{id}/{id2}/{id3}/{id4}/{id5}
+          method: post
+  deletarComentario:
+    handler: funcoes/criaComentario.deletarComentario
+    events:
+      - httpApi:
+          path: deletarComentario/{id}/{id2}/{id3}/{id4}/{id5}
+          method: delete
+  listarComentariosPublicacao:
+    handler: funcoes/criaComentario.listarComentariosDaPublicacao
+    events:
+      - httpApi:
+          path: listarComentariosPublicacao/{id}/{id2}/{id3}
+          method: get
+    
+custom:
+  serverless-offline:
+    httpPort: 3001
+
+plugins:
+  - serverless-offline
